@@ -6,6 +6,7 @@ int whichPercent(int a, int b) {
   if (a > b) {
     std::swap(a, b);
   }
+  if (a == b) return 100;
   return int((1 - static_cast<double>(a) / b) * 100);
 }
 

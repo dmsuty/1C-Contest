@@ -64,11 +64,17 @@ void FindSimilarFiles(const std::string& firstDir, const std::string& secondDir,
             if (whichPercent(firstDirContent[i].size(), secondDirContent[j].size()) < border) {
                 continue;
             }
-            int sim_koef = similarity(firstDirContent[i], secondDirContent[j]);
-            if (sim_koef == 100) {
-                std::cout << firstDirFiles[i] << " and " << secondDirFiles[i] << "are the same files\n";
+
+            if (firstDirContent[i].size() == secondDirContent[j].size()) {
+                std::string sum1 = getSHA1Sum(firstDirFiles[i]);
+                std::string sum2 = getSHA1Sum(secondDirFiles[j]);
+                if (sum1 == sum2) {
+                    std::cout << firstDirFiles[i] << " and " << secondDirFiles[i] << "are the same files\n";
+                }
             }
-            else if (sim_koef >= border) {
+
+            int sim_koef = similarity(firstDirContent[i], secondDirContent[j]);
+            if (sim_koef >= border) {
                 std::cout << firstDirFiles[i] << " and " << secondDirFiles[i] << "are similar at " << sim_koef << "%\n";
             }   
         }
